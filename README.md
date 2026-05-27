@@ -1,4 +1,4 @@
-# 보고서 [Aura_Portfolio_Report.docx](https://github.com/user-attachments/files/27581735/Aura_Portfolio_Report.docx)
+# 보고서 [Aura_Portfolio_Report.pdf](https://github.com/user-attachments/files/28304030/Aura_Portfolio_Report.pdf)
 
 Backend (Spring Boot 3.2.5)
 - JWT 인증/인가 (Spring Security)
