@@ -21,16 +21,16 @@ public class LastFmService {
     private final RestTemplate restTemplate;
 
     public Map searchTrack(String track, String artist) {
-        String url = UriComponentsBuilder.fromHttpUrl(lastFmUrl)
-                .queryParam("method", "track.search")
-                .queryParam("track", track)
-                .queryParam("artist", artist)
-                .queryParam("api_key", apiKey)
-                .queryParam("format", "json")
-                .queryParam("limit", 10)
-                .toUriString();
-
-        return restTemplate.getForObject(url, Map.class);
+        try {
+            String encodedTrack = java.net.URLEncoder.encode(track, "UTF-8").replace("%28", "(").replace("%29", ")");
+            String encodedArtist = artist != null && !artist.isEmpty()
+                    ? "&artist=" + java.net.URLEncoder.encode(artist, "UTF-8").replace("+", "%20") : "";
+            String url = lastFmUrl + "?method=track.search&track=" + encodedTrack
+                    + encodedArtist + "&api_key=" + apiKey + "&format=json&limit=30";
+            return restTemplate.getForObject(url, Map.class);
+        } catch (Exception e) {
+            return new java.util.HashMap<>();
+        }
     }
 
     public Map getTrackInfo(String track, String artist) {
